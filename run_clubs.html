@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Stride: An Austin Running Club Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <!--
+    Source Material Analysis & Narrative Plan:
+    The user wants a guide to Austin running clubs for their 22-year-old daughter who has social anxiety and fears not being a "perfect" runner. The goal is to find low-pressure environments for meeting people.
+    - Narrative Flow:
+      1.  Hook: Start with a relatable, encouraging message and a big, bold stat about the social benefits of running to immediately address her concerns.
+      2.  Club Showcase: Feature a curated list of clubs known for being social and welcoming to all paces, presented in an easy-to-digest card format.
+      3.  Visual Comparison: Use a bar chart to visually compare the clubs on a "Social vs. Performance" scale, making it easy to pick a vibe.
+      4.  The "Why": Use a donut chart to highlight the holistic benefits (friends, mood, fitness) to reinforce the positive outcomes.
+      5.  Actionable Tips: Provide a simple, confidence-boosting checklist for her first run.
+      6.  Conclusion: End with a final motivational message.
+    - Tone: Friendly, encouraging, and reassuring. Avoids competitive jargon.
+    - Color Palette Selection: Energetic & Playful (#FF5733, #FFC300, #DAF7A6, #581845). This palette is vibrant, positive, and youthful, aligning with the target audience and the encouraging message.
+    - NO SVG / NO MERMAID JS Confirmation: This implementation uses only Chart.js for canvas-based charts and structured HTML/CSS with Tailwind for all other layouts and visual elements. No SVG graphics or Mermaid JS are used.
+    -->
+    <!--
+    Visualization Selection & Justification:
+    1.  Big Number (Stat):
+        - Goal: Inform.
+        - Choice: Large HTML text.
+        - Justification: Immediately grabs attention and conveys a key encouraging fact without complexity. NO SVG.
+    2.  Club Showcase (List):
+        - Goal: Organize.
+        - Choice: Styled HTML cards.
+        - Justification: Presents detailed information for each club in a clean, comparable, and organized manner. The "Pressure Meter" is a simple styled div. NO SVG.
+    3.  Club Vibe Comparison:
+        - Goal: Compare.
+        - Choice: Bar Chart.
+        - Justification: The best way to directly compare multiple categories (clubs) across a common metric (social vs. performance focus). Clearly shows the differences in vibe. Implemented with Chart.js/Canvas. NO SVG.
+    4.  Benefits of Social Running:
+        - Goal: Inform (show composition).
+        - Choice: Donut Chart.
+        - Justification: A visually engaging way to show the parts of a whole, emphasizing that running is about more than just fitness. Implemented with Chart.js/Canvas. NO SVG.
+    5.  First Run Checklist:
+        - Goal: Organize.
+        - Choice: Styled HTML List.
+        - Justification: A simple list is the most direct and readable format for actionable tips. Styled with Tailwind and Unicode characters. NO SVG.
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFF8F0;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #FF5733, #C70039);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 450px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-6xl">
+
+        <header class="text-center my-12">
+            <h1 class="text-4xl md:text-6xl font-black gradient-text">Find Your Stride</h1>
+            <p class="text-lg md:text-xl mt-4 text-gray-600 max-w-2xl mx-auto">An encouraging guide to Austin's social running scene. Created for fun, friendship, and good vibes—not just fast times.</p>
+        </header>
+
+        <section class="text-center bg-white rounded-2xl shadow-lg p-8 my-12">
+            <p class="text-2xl md:text-3xl font-bold text-gray-700">Running with a group makes you</p>
+            <p class="text-8xl md:text-9xl font-black my-4" style="color: #FF5733;">90%</p>
+            <p class="text-2xl md:text-3xl font-bold text-gray-700">more likely to stick with it. The real goal isn't the finish line, it's the friends you make along the way.</p>
+        </section>
+
+
+        <section class="my-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">Austin's Low-Pressure All-Stars</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+
+                <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl font-bold mb-2" style="color: #581845;">Austin Beer Run Club</h3>
+                    <p class="text-gray-600 mb-4 flex-grow">The name says it all. This is arguably the most social-first club in town. The run is just a warm-up for the post-run beer and conversation. Perfect for zero-pressure socializing.</p>
+                    <div class="mt-auto">
+                        <p class="font-bold">Vibe:</p>
+                        <p>🍻 All Paces, Social, Beer-Focused</p>
+                        <p class="font-bold mt-2">Typical Crowd:</p>
+                        <p>Mainly 20s & 30s</p>
+                        <p class="font-bold mt-2">Low-Pressure Meter:</p>
+                        <div class="w-full bg-gray-200 rounded-full h-4 mt-1"><div class="h-4 rounded-full" style="width: 95%; background-color: #FFC300;"></div></div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl font-bold mb-2" style="color: #581845;">East Austin Run Club</h3>
+                    <p class="text-gray-600 mb-4 flex-grow">A vibrant and diverse group that meets multiple times a week. It's grown a lot but maintains a welcoming, community feel. They always have different pace groups, so no one gets left behind.</p>
+                    <div class="mt-auto">
+                        <p class="font-bold">Vibe:</p>
+                        <p>👟 Community, Consistent, Welcoming</p>
+                        <p class="font-bold mt-2">Typical Crowd:</p>
+                        <p>Wide range, lots of 20s & 30s</p>
+                        <p class="font-bold mt-2">Low-Pressure Meter:</p>
+                        <div class="w-full bg-gray-200 rounded-full h-4 mt-1"><div class="h-4 rounded-full" style="width: 85%; background-color: #FFC300;"></div></div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl font-bold mb-2" style="color: #581845;">The Morning Jo's Run Club</h3>
+                    <p class="text-gray-600 mb-4 flex-grow">An Austin institution. This group meets for a run around Lady Bird Lake and then grabs coffee at Jo's. It's a great way to start your day and meet people who are active and friendly.</p>
+                    <div class="mt-auto">
+                        <p class="font-bold">Vibe:</p>
+                        <p>☀️ Morning People, Classic Austin, Casual</p>
+                        <p class="font-bold mt-2">Typical Crowd:</p>
+                        <p>All ages, very diverse</p>
+                        <p class="font-bold mt-2">Low-Pressure Meter:</p>
+                        <div class="w-full bg-gray-200 rounded-full h-4 mt-1"><div class="h-4 rounded-full" style="width: 80%; background-color: #FFC300;"></div></div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl font-bold mb-2" style="color: #581845;">Rise and Run South Austin</h3>
+                     <p class="text-gray-600 mb-4 flex-grow">A smaller, more intimate group perfect for those who might find larger clubs overwhelming. They focus on creating a supportive atmosphere where every runner, new or experienced, feels valued.</p>
+                    <div class="mt-auto">
+                        <p class="font-bold">Vibe:</p>
+                        <p>🌳 Supportive, Smaller Group, Neighborhood Feel</p>
+                        <p class="font-bold mt-2">Typical Crowd:</p>
+                        <p>Locals, mix of ages</p>
+                        <p class="font-bold mt-2">Low-Pressure Meter:</p>
+                         <div class="w-full bg-gray-200 rounded-full h-4 mt-1"><div class="h-4 rounded-full" style="width: 90%; background-color: #FFC300;"></div></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        
+        <section class="my-16">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
+                <div class="lg:col-span-2">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center lg:text-left mb-4">What's the Vibe?</h2>
+                    <p class="text-gray-600 text-lg">Every club is different. Some are focused on training hard, while others are all about the post-run social hour. This chart shows where some of Austin's popular clubs land on the scale from "Purely Social" to "Performance Focused." The clubs we've highlighted are definitely on the social side, making them perfect for meeting new people without the pressure to be the fastest.</p>
+                </div>
+                <div class="lg:col-span-3 bg-white rounded-2xl shadow-lg p-6">
+                    <div class="chart-container">
+                        <canvas id="clubComparisonChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="my-16">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
+                 <div class="lg:col-span-3 bg-white rounded-2xl shadow-lg p-6 order-2 lg:order-1">
+                    <div class="chart-container h-80 md:h-96">
+                        <canvas id="benefitsChart"></canvas>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 order-1 lg:order-2">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center lg:text-left mb-4">The Real Payoff</h2>
+                    <p class="text-gray-600 text-lg">Joining a run club is about so much more than just running. It’s a powerful tool for building a social circle, boosting your mental health, and, of course, improving your fitness. Think of it as investing in your overall well-being. The friendships and confidence you'll build are the real prizes.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="my-16 bg-white rounded-2xl shadow-lg p-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8">Your First Run: A No-Stress Checklist</h2>
+            <ul class="space-y-4 max-w-lg mx-auto text-lg">
+                <li class="flex items-start"><span class="text-2xl mr-3" style="color: #FF5733;">✔</span><div><span class="font-bold">Just Show Up.</span> Seriously, that's the hardest part and the biggest win.</div></li>
+                <li class="flex items-start"><span class="text-2xl mr-3" style="color: #FF5733;">✔</span><div><span class="font-bold">Nobody is Watching.</span> Everyone is focused on their own run. No one is judging your pace or your form.</div></li>
+                <li class="flex items-start"><span class="text-2xl mr-3" style="color: #FF5733;">✔</span><div><span class="font-bold">Introduce Yourself to One Person.</span> A simple "Hey, is this your first time here too?" is a perfect opener.</div></li>
+                <li class="flex items-start"><span class="text-2xl mr-3" style="color: #FF5733;">✔</span><div><span class="font-bold">Stay for the Hangout.</span> The post-run coffee or beer is where the real connections are made. Don't skip it!</div></li>
+                <li class="flex items-start"><span class="text-2xl mr-3" style="color: #FF5733;">✔</span><div><span class="font-bold">Celebrate Finishing.</span> You did it! It doesn't matter how fast or slow you were. You showed up, and that's awesome.</div></li>
+            </ul>
+        </section>
+
+        <footer class="text-center my-12">
+            <p class="text-2xl font-bold gradient-text">Your crew is out there.</p>
+            <p class="text-gray-600 text-lg mt-2">Lace up and go find them.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const wrapLabel = (label) => {
+                if (label.length > 16) {
+                    const words = label.split(' ');
+                    const lines = [];
+                    let currentLine = '';
+                    words.forEach(word => {
+                        if ((currentLine + word).length > 16) {
+                            lines.push(currentLine.trim());
+                            currentLine = '';
+                        }
+                        currentLine += word + ' ';
+                    });
+                    lines.push(currentLine.trim());
+                    return lines;
+                }
+                return label;
+            };
+
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                  return label.join(' ');
+                } else {
+                  return label;
+                }
+            };
+            
+            const clubCtx = document.getElementById('clubComparisonChart').getContext('2d');
+            const clubLabels = ['Austin Beer Run Club', 'East Austin Run Club', 'The Morning Jo\'s', 'Trail Roots'].map(wrapLabel);
+            new Chart(clubCtx, {
+                type: 'bar',
+                data: {
+                    labels: clubLabels,
+                    datasets: [{
+                        label: 'Social Focus',
+                        data: [9, 8, 7, 6],
+                        backgroundColor: '#FFC300',
+                        borderColor: '#FFC300',
+                        borderWidth: 1
+                    }, {
+                        label: 'Performance Focus',
+                        data: [2, 4, 6, 8],
+                        backgroundColor: '#581845',
+                        borderColor: '#581845',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            stacked: true,
+                            max: 12,
+                            ticks: {
+                                display: false
+                            },
+                            grid: {
+                                display: false
+                            }
+                        },
+                        y: {
+                            stacked: true,
+                             grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Club Vibe: Social vs. Performance Focus',
+                            padding: {
+                                top: 10,
+                                bottom: 20
+                            },
+                            font: {
+                                size: 16
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    }
+                }
+            });
+
+            const benefitsCtx = document.getElementById('benefitsChart').getContext('2d');
+            new Chart(benefitsCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['New Friends', 'Better Mood', 'Improved Fitness'],
+                    datasets: [{
+                        label: 'Benefits',
+                        data: [50, 30, 20],
+                        backgroundColor: [
+                            '#FF5733',
+                            '#FFC300',
+                            '#581845'
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                     plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        title: {
+                            display: true,
+                            text: 'The Payoff: More Than Just Miles',
+                             padding: {
+                                top: 10,
+                                bottom: 20
+                            },
+                            font: {
+                                size: 16
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    }
+                }
+            });
+
+        });
+    </script>
+
+</body>
+</html>
